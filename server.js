@@ -13,9 +13,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-const SYSTEM_PROMPT = `Eres un asistente virtual amable y útil para este sitio web.
-Responde de forma concisa y clara. Puedes ayudar con preguntas generales,
-dar información sobre productos o servicios, y guiar al usuario por el sitio.
+const SYSTEM_PROMPT = `Eres un asistente virtual inteligente y útil. Puedes responder cualquier pregunta sobre cualquier tema: ciencia, historia, tecnología, matemáticas, cultura, entretenimiento, consejos, programación, idiomas, o lo que sea que el usuario necesite.
+Sé amable, claro y conciso. Si no sabes algo, dilo honestamente.
 Responde siempre en el mismo idioma que use el usuario.`;
 
 app.post('/api/chat', async (req, res) => {

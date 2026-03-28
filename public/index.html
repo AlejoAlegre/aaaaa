@@ -13,7 +13,7 @@
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-container">
-      <a href="#" class="nav-logo">
+      <a href="#inicio" class="nav-logo">
         <span class="logo-icon">◆</span>
         <span>MiEmpresa</span>
       </a>
@@ -23,7 +23,7 @@
         <li><a href="#sobre">Nosotros</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
-      <button class="nav-cta">Empezar</button>
+      <button class="nav-cta" onclick="scrollToSection('contacto')">Empezar</button>
     </div>
   </nav>
 
@@ -34,8 +34,8 @@
       <h1>Soluciones digitales <span class="gradient-text">que transforman</span> tu negocio</h1>
       <p>Creamos experiencias digitales excepcionales que conectan con tu audiencia y generan resultados reales.</p>
       <div class="hero-actions">
-        <button class="btn-primary">Comenzar ahora</button>
-        <button class="btn-secondary">Ver demo →</button>
+        <button class="btn-primary" onclick="scrollToSection('contacto')">Comenzar ahora</button>
+        <button class="btn-secondary" onclick="scrollToSection('servicios')">Ver demo →</button>
       </div>
       <div class="hero-stats">
         <div class="stat">
@@ -89,42 +89,42 @@
         <p>Ofrecemos soluciones completas adaptadas a las necesidades de tu empresa.</p>
       </div>
       <div class="services-grid">
-        <div class="service-card">
+        <div class="service-card" onclick="openServiceModal('diseno')">
           <div class="service-icon">🎨</div>
           <h3>Diseño Web</h3>
           <p>Interfaces modernas y atractivas que convierten visitantes en clientes.</p>
-          <a href="#" class="service-link">Saber más →</a>
+          <span class="service-link">Saber más →</span>
         </div>
-        <div class="service-card featured">
+        <div class="service-card featured" onclick="openServiceModal('desarrollo')">
           <div class="service-badge">Popular</div>
           <div class="service-icon">⚡</div>
           <h3>Desarrollo Full-Stack</h3>
           <p>Aplicaciones web robustas y escalables con las últimas tecnologías.</p>
-          <a href="#" class="service-link">Saber más →</a>
+          <span class="service-link">Saber más →</span>
         </div>
-        <div class="service-card">
+        <div class="service-card" onclick="openServiceModal('ia')">
           <div class="service-icon">🤖</div>
           <h3>IA & Chatbots</h3>
           <p>Integración de inteligencia artificial para automatizar y mejorar tu negocio.</p>
-          <a href="#" class="service-link">Saber más →</a>
+          <span class="service-link">Saber más →</span>
         </div>
-        <div class="service-card">
+        <div class="service-card" onclick="openServiceModal('marketing')">
           <div class="service-icon">📈</div>
           <h3>Marketing Digital</h3>
           <p>Estrategias de crecimiento basadas en datos para maximizar tu ROI.</p>
-          <a href="#" class="service-link">Saber más →</a>
+          <span class="service-link">Saber más →</span>
         </div>
-        <div class="service-card">
+        <div class="service-card" onclick="openServiceModal('seguridad')">
           <div class="service-icon">🔒</div>
           <h3>Ciberseguridad</h3>
           <p>Protección avanzada para mantener tus datos y sistemas seguros.</p>
-          <a href="#" class="service-link">Saber más →</a>
+          <span class="service-link">Saber más →</span>
         </div>
-        <div class="service-card">
+        <div class="service-card" onclick="openServiceModal('cloud')">
           <div class="service-icon">☁️</div>
           <h3>Cloud & DevOps</h3>
           <p>Infraestructura en la nube optimizada para rendimiento y costes.</p>
-          <a href="#" class="service-link">Saber más →</a>
+          <span class="service-link">Saber más →</span>
         </div>
       </div>
     </div>
@@ -143,7 +143,7 @@
           <li>✅ Metodología ágil con entregas rápidas</li>
           <li>✅ Garantía de satisfacción del 100%</li>
         </ul>
-        <button class="btn-primary">Conoce al equipo</button>
+        <button class="btn-primary" onclick="openTeamModal()">Conoce al equipo</button>
       </div>
       <div class="about-image">
         <div class="image-placeholder">
@@ -151,7 +151,6 @@
             <div class="img-block b1">🧑‍💻</div>
             <div class="img-block b2">👩‍🎨</div>
             <div class="img-block b3">📱</div>
-            <div class="img-block b4">💡</div>
           </div>
         </div>
       </div>
@@ -166,15 +165,21 @@
         <h2>¿Listo para <span class="gradient-text">empezar</span>?</h2>
         <p>Cuéntanos tu proyecto y te ayudamos a hacerlo realidad.</p>
       </div>
-      <form class="contact-form">
+      <form class="contact-form" id="contactForm">
         <div class="form-row">
-          <input type="text" placeholder="Tu nombre" required />
-          <input type="email" placeholder="Tu email" required />
+          <input type="text" id="formName" placeholder="Tu nombre" required />
+          <input type="email" id="formEmail" placeholder="Tu email" required />
         </div>
-        <input type="text" placeholder="Asunto" />
-        <textarea placeholder="Cuéntanos sobre tu proyecto..." rows="5" required></textarea>
+        <input type="text" id="formSubject" placeholder="Asunto" />
+        <textarea id="formMessage" placeholder="Cuéntanos sobre tu proyecto..." rows="5" required></textarea>
         <button type="submit" class="btn-primary">Enviar mensaje</button>
       </form>
+      <div class="form-success" id="formSuccess" style="display:none">
+        <div class="success-icon">✅</div>
+        <h3>¡Mensaje enviado!</h3>
+        <p>Gracias por contactarnos. Te responderemos lo antes posible.</p>
+        <button class="btn-secondary" onclick="resetForm()">Enviar otro mensaje</button>
+      </div>
     </div>
   </section>
 
@@ -189,21 +194,21 @@
       <div class="footer-links">
         <div class="footer-col">
           <h4>Empresa</h4>
-          <a href="#">Sobre nosotros</a>
-          <a href="#">Blog</a>
-          <a href="#">Careers</a>
+          <a href="#sobre" onclick="scrollToSection('sobre')">Sobre nosotros</a>
+          <a href="#" onclick="openModal('blog')">Blog</a>
+          <a href="#" onclick="openModal('careers')">Careers</a>
         </div>
         <div class="footer-col">
           <h4>Servicios</h4>
-          <a href="#">Diseño Web</a>
-          <a href="#">Desarrollo</a>
-          <a href="#">Marketing</a>
+          <a href="#" onclick="openServiceModal('diseno')">Diseño Web</a>
+          <a href="#" onclick="openServiceModal('desarrollo')">Desarrollo</a>
+          <a href="#" onclick="openServiceModal('marketing')">Marketing</a>
         </div>
         <div class="footer-col">
           <h4>Legal</h4>
-          <a href="#">Privacidad</a>
-          <a href="#">Términos</a>
-          <a href="#">Cookies</a>
+          <a href="#" onclick="openModal('privacidad')">Privacidad</a>
+          <a href="#" onclick="openModal('terminos')">Términos</a>
+          <a href="#" onclick="openModal('cookies')">Cookies</a>
         </div>
       </div>
     </div>
@@ -211,6 +216,14 @@
       <p>© 2025 MiEmpresa. Todos los derechos reservados.</p>
     </div>
   </footer>
+
+  <!-- MODAL GENÉRICO -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
 
   <!-- CHATBOT WIDGET -->
   <div class="chatbot-container" id="chatbot">
@@ -228,7 +241,7 @@
       <div class="chat-messages" id="chatMessages">
         <div class="message bot-message">
           <div class="message-bubble">
-            ¡Hola! 👋 Soy tu asistente virtual. ¿En qué puedo ayudarte hoy?
+            ¡Hola! 👋 Soy tu asistente virtual. Puedo ayudarte con cualquier pregunta. ¿En qué puedo ayudarte?
           </div>
           <span class="message-time">Ahora</span>
         </div>
@@ -256,5 +269,6 @@
   </div>
 
   <script src="chatbot.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

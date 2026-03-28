@@ -20,6 +20,7 @@
       <ul class="nav-links">
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#excel-bodega">Excel Bodega</a></li>
         <li><a href="#sobre">Nosotros</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
@@ -126,6 +127,85 @@
           <p>Infraestructura en la nube optimizada para rendimiento y costes.</p>
           <span class="service-link">Saber más →</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXCEL BODEGA -->
+  <section class="excel-section" id="excel-bodega">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-badge">Gratis</span>
+        <h2>Excel automatizado para <span class="gradient-text">bodegas</span></h2>
+        <p>Generá un archivo Excel completo con inventario, ventas, movimientos y reportes — listo para usar en segundos.</p>
+      </div>
+
+      <div class="excel-features">
+        <div class="excel-feature">
+          <span class="ef-icon">📦</span>
+          <div>
+            <strong>Inventario inteligente</strong>
+            <p>Alertas automáticas de stock bajo, categorías con menú desplegable, valor total calculado.</p>
+          </div>
+        </div>
+        <div class="excel-feature">
+          <span class="ef-icon">🔄</span>
+          <div>
+            <strong>Registro de movimientos</strong>
+            <p>Entradas y salidas de stock con totales automáticos y colores para identificar el tipo.</p>
+          </div>
+        </div>
+        <div class="excel-feature">
+          <span class="ef-icon">💰</span>
+          <div>
+            <strong>Control de ventas</strong>
+            <p>Subtotales con descuentos automáticos, estados de cobro, formas de pago.</p>
+          </div>
+        </div>
+        <div class="excel-feature">
+          <span class="ef-icon">📊</span>
+          <div>
+            <strong>Dashboard en tiempo real</strong>
+            <p>Indicadores clave que se actualizan solos: ventas del mes, stock bajo, valor del inventario.</p>
+          </div>
+        </div>
+        <div class="excel-feature">
+          <span class="ef-icon">🏭</span>
+          <div>
+            <strong>Directorio de proveedores</strong>
+            <p>Toda la información de tus proveedores organizada y filtrable.</p>
+          </div>
+        </div>
+        <div class="excel-feature">
+          <span class="ef-icon">✅</span>
+          <div>
+            <strong>Sin necesidad de programar</strong>
+            <p>Solo ingresá el nombre de tu bodega y descargá el Excel listo para completar.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="excel-generator-box">
+        <div class="excel-gen-header">
+          <span class="excel-gen-icon">📥</span>
+          <div>
+            <h3>Generar mi Excel</h3>
+            <p>Personalizado con el nombre de tu negocio</p>
+          </div>
+        </div>
+        <div class="excel-gen-form">
+          <input
+            type="text"
+            id="bodegaName"
+            placeholder="Ej: Bodega Don Carlos, Vinoteca El Sol..."
+            maxlength="60"
+          />
+          <button class="btn-excel" id="btnGenerarExcel" onclick="generarExcelBodega()">
+            <span id="btnExcelText">⬇ Descargar Excel</span>
+            <span id="btnExcelLoading" style="display:none">⏳ Generando...</span>
+          </button>
+        </div>
+        <p class="excel-disclaimer">Gratis · Sin registro · Compatible con Excel y Google Sheets</p>
       </div>
     </div>
   </section>
@@ -270,5 +350,6 @@
 
   <script src="chatbot.js"></script>
   <script src="app.js"></script>
+  <script src="excel.js"></script>
 </body>
 </html>

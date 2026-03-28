@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const Anthropic = require('@anthropic-ai/sdk');
 const path = require('path');
+const { generateBodegaExcel } = require('./excel-generator');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -49,6 +50,28 @@ app.post('/api/chat', async (req, res) => {
     if (!res.headersSent) {
       res.status(500).json({ error: 'Error al comunicarse con el asistente' });
     }
+  }
+});
+
+// Excel generation endpoint
+app.post('/api/excel/bodega', async (req, res) => {
+  const { nombreBodega = 'Mi Bodega' } = req.body;
+
+  // Sanitize input
+  const nombre = String(nombreBodega).replace(/[<>"'/\\]/g, '').trim().slice(0, 60) || 'Mi Bodega';
+
+  try {
+    const wb = await generateBodegaExcel(nombre);
+    const fileName = `Bodega_${nombre.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.xlsx`;
+
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+
+    await wb.xlsx.write(res);
+    res.end();
+  } catch (err) {
+    console.error('Error generando Excel:', err);
+    res.status(500).json({ error: 'Error al generar el archivo Excel' });
   }
 });
 

@@ -1116,3 +1116,149 @@ body {
 
   .chat-window { width: calc(100vw - 2rem); }
 }
+
+/* ============================================
+   EXCEL BODEGA SECTION
+   ============================================ */
+.excel-section {
+  background: linear-gradient(180deg, #0f0f13 0%, #12121c 100%);
+  padding: 6rem 0;
+}
+
+.excel-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin: 3rem 0;
+}
+
+.excel-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.excel-feature:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+}
+
+.ef-icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.excel-feature strong {
+  display: block;
+  color: var(--text);
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+}
+
+.excel-feature p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.excel-generator-box {
+  background: var(--bg-card);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  max-width: 640px;
+  margin: 0 auto;
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.1);
+}
+
+.excel-gen-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.excel-gen-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.excel-gen-header h3 {
+  font-size: 1.3rem;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+
+.excel-gen-header p {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.excel-gen-form {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.excel-gen-form input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.excel-gen-form input:focus {
+  border-color: var(--primary);
+}
+
+.excel-gen-form input::placeholder {
+  color: var(--text-muted);
+}
+
+.btn-excel {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #217346, #1a5c39);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.btn-excel:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-excel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.excel-disclaimer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 600px) {
+  .excel-gen-form { flex-direction: column; }
+  .btn-excel { width: 100%; }
+}

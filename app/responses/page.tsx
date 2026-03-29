@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import Link from 'next/link';
+import DeleteButton from './DeleteButton';
 
 const QUESTION_LABELS: Record<string, string> = {
   area: 'Área',
@@ -102,7 +103,10 @@ export default async function ResponsesPage() {
                       {resp.data?.contacto ? String(resp.data.contacto) : 'Anónimo'}
                     </span>
                   </div>
-                  <span className="text-xs text-stone-400">{formatDate(resp.submitted_at)}</span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs text-stone-400">{formatDate(resp.submitted_at)}</span>
+                    <DeleteButton id={resp.id} />
+                  </div>
                 </div>
 
                 <div className="divide-y divide-stone-100">

@@ -1,8 +1,5 @@
-import { promises as fs } from 'fs';
-import path from 'path';
+import { createClient } from '@supabase/supabase-js';
 import Link from 'next/link';
-
-const DATA_FILE = path.join(process.cwd(), 'data', 'responses.json');
 
 const QUESTION_LABELS: Record<string, string> = {
   area: 'Área',
@@ -17,22 +14,30 @@ const QUESTION_LABELS: Record<string, string> = {
   contacto: 'Contacto',
 };
 
-type Response = {
+type Row = {
   id: number;
-  submittedAt: string;
-  [key: string]: string | string[] | number;
+  submitted_at: string;
+  data: Record<string, string | string[]>;
 };
 
-async function getResponses(): Promise<Response[]> {
-  try {
-    const raw = await fs.readFile(DATA_FILE, 'utf-8');
-    return JSON.parse(raw);
-  } catch {
+async function getResponses(): Promise<Row[]> {
+  const supabase = createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SECRET_KEY!
+  );
+  const { data, error } = await supabase
+    .from('responses')
+    .select('*')
+    .order('submitted_at', { ascending: false });
+
+  if (error) {
+    console.error(error);
     return [];
   }
+  return data ?? [];
 }
 
-function formatValue(value: string | string[] | number): string {
+function formatValue(value: string | string[]): string {
   if (Array.isArray(value)) return value.join(', ');
   return String(value);
 }
@@ -46,6 +51,8 @@ function formatDate(iso: string): string {
     minute: '2-digit',
   });
 }
+
+export const revalidate = 0;
 
 export default async function ResponsesPage() {
   const responses = await getResponses();
@@ -81,7 +88,7 @@ export default async function ResponsesPage() {
           </div>
         ) : (
           <div className="space-y-6">
-            {[...responses].reverse().map((resp) => (
+            {responses.map((resp) => (
               <div
                 key={resp.id}
                 className="rounded-3xl border border-stone-200 bg-white shadow-sm overflow-hidden"
@@ -92,15 +99,15 @@ export default async function ResponsesPage() {
                       #
                     </div>
                     <span className="text-sm font-medium text-stone-700">
-                      {resp.contacto ? String(resp.contacto) : 'Anónimo'}
+                      {resp.data?.contacto ? String(resp.data.contacto) : 'Anónimo'}
                     </span>
                   </div>
-                  <span className="text-xs text-stone-400">{formatDate(String(resp.submittedAt))}</span>
+                  <span className="text-xs text-stone-400">{formatDate(resp.submitted_at)}</span>
                 </div>
 
                 <div className="divide-y divide-stone-100">
                   {Object.entries(QUESTION_LABELS).map(([key, label]) => {
-                    const value = resp[key];
+                    const value = resp.data?.[key];
                     if (!value || (Array.isArray(value) && value.length === 0)) return null;
                     return (
                       <div key={key} className="grid grid-cols-1 gap-1 px-6 py-4 md:grid-cols-3">
